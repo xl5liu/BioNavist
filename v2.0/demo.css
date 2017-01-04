@@ -1,0 +1,63 @@
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+body {
+    overflow: hidden;
+    margin: 0;
+    font: 10px sans-serif;
+}
+
+text {
+    font: 10px sans-serif;
+    pointer-events: none;
+}
+svg {
+  border: 1px solid #ccc;
+}
+
+circle.node {
+  fill: lightsteelblue;
+  stroke: #555;
+  stroke-width: 3px;
+}
+circle.leaf {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+path.hull {
+  fill: lightsteelblue;
+  fill-opacity: 0.3;
+}
+line.link {
+  stroke: #333;
+  stroke-opacity: 0.5;
+  pointer-events: none;
+}
+
+#sidebar {
+    position: fixed;
+    width: 270px;
+    padding: 10px 10px;
+    height: 100%;
+    z-index: 9999;
+    background-color: #a7a7a7;
+    top: 0;
+    right: 0;
+}
+
+#sidebar-links {
+    overflow-y: scroll;
+    height: 95%;
+}
+
+#sidebar-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar-links ul li:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

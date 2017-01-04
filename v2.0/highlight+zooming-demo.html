@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Semantic Zooming Demo</title>
+     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="demo.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+  </head>
+
+  <body>
+
+    <div id="sidebar">
+      <h2>Nodes</h2>
+      <div id="sidebar-links">
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var width = window.innerWidth,     // svg width
+          height = window.innerHeight,     // svg height
+          dr = 4,      // default point radius
+          off = 15,    // cluster hull offset
+          expand = {}, // expanded clusters
+          padding = 1.5, // separation between same-color nodes
+          clusterPadding = 6, // separation between different-color nodes
+          data, net, force, hullg, hull, linkg, link, nodeg, node, label, circle, linkpathg, path, linklabelg, linklabel;
+
+      var focus_node = null, highlight_node = null;
+
+
+      var curve = d3.svg.line()
+          .interpolate("cardinal-closed")
+          .tension(.85);
+
+      var fill = d3.scale.category20();
+
+      function noop() { return false; }
+
+      function nodeid(n) {
+        return n.size ? "_g_"+n.group : n.name;
+      }
+
+      function linkid(l) {
+        var u = nodeid(l.source),
+            v = nodeid(l.target);
+        return u<v ? u+"|"+v : v+"|"+u;
+      }
+
+      function getGroup(n) { return n.group; }
+
+      // constructs the network to visualize
+      function network(data, prev, index, expand) {
+        expand = expand || {};
+        var gm = {},    // group map
+            nm = {},    // node map
+            lm = {},    // link map
+            gn = {},    // previous group nodes
+            gc = {},    // previous group centroids
+            nodes = [], // output nodes
+            links = []; // output links
+
+        // process previous nodes for reuse or centroid calculation
+        if (prev) {
+          prev.nodes.forEach(function(n) {
+            var i = index(n), o;
+            if (n.size > 0) {
+              gn[i] = n;
+              n.size = 0;
+            } else {
+              o = gc[i] || (gc[i] = {x:0,y:0,count:0});
+              o.x += n.x;
+              o.y += n.y;
+              o.count += 1;
+            }
+          });
+        }
+
+        // determine nodes
+        for (var k=0; k<data.nodes.length; ++k) {
+          var n = data.nodes[k],
+              i = index(n),
+              l = gm[i] || (gm[i]=gn[i]) || (gm[i]={group:i, size:0, nodes:[]});
+
+          if (expand[i]) {
+            // the node should be directly visible
+            nm[n.name] = nodes.length;
+            nodes.push(n);
+            if (gn[i]) {
+              // place new nodes at cluster location (plus jitter)
+              n.x = gn[i].x + Math.random();
+              n.y = gn[i].y + Math.random();
+            }
+          } else {
+            // the node is part of a collapsed cluster
+            if (l.size == 0) {
+              // if new cluster, add to set and position at centroid of leaf nodes
+              nm[i] = nodes.length;
+              nodes.push(l);
+              if (gc[i]) {
+                l.x = gc[i].x / gc[i].count;
+                l.y = gc[i].y / gc[i].count;
+              }
+            }
+            l.nodes.push(n);
+          }
+        // always count group size as we also use it to tweak the force graph strengths/distances
+          l.size += 1;
+        n.group_data = l;
+        }
+
+        for (i in gm) { gm[i].link_count = 0; }
+
+        // determine links
+        for (k=0; k<data.links.length; ++k) {
+          var e = data.links[k],
+              u = index(e.source),
+              v = index(e.target);
+        if (u != v) {
+          gm[u].link_count++;
+          gm[v].link_count++;
+        }
+          u = expand[u] ? nm[e.source.name] : nm[u];
+          v = expand[v] ? nm[e.target.name] : nm[v];
+          var i = (u<v ? u+"|"+v : v+"|"+u),
+              l = lm[i] || (lm[i] = {source:u, target:v, size:0});
+          l.size += 1;
+        }
+        for (i in lm) { links.push(lm[i]); }
+
+        return {nodes: nodes, links: links};
+      }
+
+      function convexHulls(nodes, index, offset) {
+        var hulls = {};
+
+        // create point sets
+        for (var k=0; k<nodes.length; ++k) {
+          var n = nodes[k];
+          if (n.size) continue;
+          var i = index(n),
+              l = hulls[i] || (hulls[i] = []);
+          l.push([n.x-offset, n.y-offset]);
+          l.push([n.x-offset, n.y+offset]);
+          l.push([n.x+offset, n.y-offset]);
+          l.push([n.x+offset, n.y+offset]);
+        }
+
+        // create convex hulls
+        var hullset = [];
+        for (i in hulls) {
+          hullset.push({group: i, path: d3.geom.hull(hulls[i])});
+        }
+
+        return hullset;
+      }
+
+      function drawCluster(d) {
+        return curve(d.path); // 0.8
+      }
+
+      function clickSidebarLink(nodes, element) {
+        var elementName = element.innerHTML;
+        for (var i = 0; i < nodes.length; i++) {
+          if (nodes[i].id === elementName) {
+            return nodes[i];
+          }
+        }
+      }
+
+      function tick() {
+
+          if (!hull.empty()) {
+            hull.data(convexHulls(net.nodes, getGroup, off))
+                .attr("d", drawCluster);
+          }
+
+          link.attr("x1", function(d) { return translation[0] + scaleFactor*d.source.x; })
+              .attr("y1", function(d) { return translation[1] + scaleFactor*d.source.y; })
+              .attr("x2", function(d) { return translation[0] + scaleFactor*d.target.x; })
+              .attr("y2", function(d) { return translation[1] + scaleFactor*d.target.y; });
+
+          node
+              .attr("cx", function(d) { return translation[0] + scaleFactor*d.x; })
+              .attr("cy", function(d) { return translation[1] + scaleFactor*d.y; });
+
+          label.attr("x", function(d) { return translation[0] + scaleFactor*d.x; })
+               .attr("y", function(d) { return translation[1] + scaleFactor*d.y; });
+
+          path
+               .attr('d', function(d) { var string='M '+(translation[0] + scaleFactor*d.source.x)+' '+(translation[1] + scaleFactor*d.source.y) +' L '+ (translation[0] + scaleFactor*d.target.x) +' '+ (translation[1] + scaleFactor*d.target.y);
+                                        return string});
+      
+          linklabel
+              .attr('transform',function(d,i){
+                if (d.target.x<d.source.x){
+                    bbox = this.getBBox();
+                    rx = bbox.x+bbox.width/2;
+                    ry = bbox.y+bbox.height/2;
+                    return 'rotate(180 '+rx+' '+ry+')';
+                    }
+                else {
+                    return 'rotate(0)';
+                    }});
+        }
+       // function contain(polygon, point) {
+       //    var n = polygon.length,
+       //        p = polygon[n - 1],
+       //        x = point[0], y = point[1],
+       //        x0 = p[0], y0 = p[1],
+       //        x1, y1,
+       //        inside = false;
+
+       //    for (var i = 0; i < n; ++i) {
+       //      p = polygon[i], x1 = p[0], y1 = p[1];
+       //      if (((y1 > y) !== (y0 > y)) && (x < (x0 - x1) * (y - y1) / (y0 - y1) + x1)) inside = !inside;
+       //      x0 = x1, y0 = y1;
+       //    }
+
+       //    return inside;
+       //  }
+
+       //----------------fix after drag---------------------
+        function dblclick(d) {
+          d3.select(this).classed("fixed", d.fixed = false);
+        }
+
+        function dragstart(d) {
+          d3.select(this).classed("fixed", d.fixed = true);
+        }
+      //----------------highlighting-----------------------
+        var highlight_color = "blue";
+        var highlight_trans = 0.1;
+        var default_link_color = "#888";
+        var linkedByIndex = {};
+
+
+        function isConnected(a, b) {
+        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+        } 
+
+        function exit_highlight() {
+                highlight_node = null;
+            if (focus_node===null)
+            {
+                vis.style("cursor","move");
+                if (highlight_color!="white")
+            {
+              circle.style("stroke", "white");
+              label.style("font-weight", "normal");
+              link.style("stroke", default_link_color);
+         }
+                    
+            }
+        }
+
+        function set_highlight(d) {
+            vis.style("cursor","pointer");
+            if (focus_node!==null) d = focus_node;
+            highlight_node = d;
+
+            if (highlight_color!="white")
+            {
+                  circle.style("stroke", function(o) {
+                        return isConnected(d, o) ? highlight_color : "white";});
+                    label.style("font-weight", function(o) {
+                        return isConnected(d, o) ? "bold" : "normal";});
+                    link.style("stroke", function(o) {
+                      return o.source.index == d.index || o.target.index == d.index ? highlight_color : default_link_color;
+
+                    });
+            }
+        }
+
+        // function set_focus(d) {   
+        // if (highlight_trans<1)  {
+        //     circle.style("opacity", function(o) {
+        //                 return isConnected(d, o) ? 1 : highlight_trans;
+        //             });
+
+        //             text.style("opacity", function(o) {
+        //                 return isConnected(d, o) ? 1 : highlight_trans;
+        //             });
+                    
+        //             link.style("opacity", function(o) {
+        //                 return o.source.index == d.index || o.target.index == d.index ? 1 : highlight_trans;
+        //             });     
+        //     }
+        // }
+
+       //------Zoom Stuff------
+       var scaleFactor = 1;
+       var translation = [0,0];
+
+       var zoomer = d3.behavior.zoom()
+                .scaleExtent([0.1,10])
+        //allow 10 times zoom in or out
+                .on("zoom", zoom);
+        //define the event handler function
+
+        function zoom() {
+            console.log("zoom", d3.event.translate, d3.event.scale);
+            scaleFactor = d3.event.scale;
+            translation = d3.event.translate;
+            tick(); //update positions
+        }
+
+
+
+       //----------------------
+
+      // --------------------------------------------------------
+
+      var body = d3.select("body");
+
+      var vis = body.append("svg")
+         .attr("width", width)
+         .attr("height", height)
+          .append("g")
+          .attr("class", "graph")
+          .call(zoomer); //Attach zoom behaviour.
+
+      var rect = vis.append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .style("fill", "none") 
+              //make transparent (vs black if commented-out)
+          .style("pointer-events", "all");  
+    
+
+      //side panel stuff   
+      d3.json("graph.json", function(json) {
+
+        json.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+        });
+
+        var nodeNames = _.sortBy(json.nodes, ['name']).map(function(node) {
+            return "<li class='node-name'>" + node.name + "</li>";
+           });
+           var nodeList = "<ul>" + nodeNames.join("") + "</ul>";
+           document.getElementById('sidebar-links').innerHTML = nodeList;
+           var listNodeLinks = document.getElementById('sidebar-links').getElementsByTagName('li');
+           for (var i = 0; i < listNodeLinks.length; i++) {
+             var nodeLink = listNodeLinks[i];
+             nodeLink.addEventListener('click', function() {
+               var nodes = json.nodes;
+               var elementName = this.innerHTML.replace(/[ \(\)]/g, '');
+               for (var i = 0; i < nodes.length; i++) {
+                 if (nodes[i].name == elementName) {
+                   var targetNode = g.select('#' + nodes[i].name);
+                   // TODO Check if node is selected and perform action
+                    set_highlight(targetNode);
+                   return;
+                 }
+               }
+             });
+           }
+       
+
+
+
+        data = json;
+        for (var i=0; i<data.links.length; ++i) {
+          o = data.links[i];
+          o.source = data.nodes[o.source];
+          o.target = data.nodes[o.target];
+        }
+
+        hullg = vis.append("g");
+        linkg = vis.append("g");
+        nodeg = vis.append("g");
+        labelg = vis.append("g");
+        linkpathg = vis.append("g");
+        linklabelg = vis.append("g");
+
+
+        init();
+
+        vis.attr("opacity", 1e-6)
+          .transition()
+            .duration(1000)
+            .attr("opacity", 1);
+      });
+
+      function init() {
+        if (force) force.stop();
+
+        net = network(data, net, getGroup, expand);
+
+
+        force = d3.layout.force()
+            .nodes(net.nodes)
+            .links(net.links)
+            .size([width, height])
+            .linkDistance(function(l, i) {
+            var n1 = l.source, n2 = l.target;
+          // larger distance for bigger groups:
+          // both between single nodes and _other_ groups (where size of own node group still counts),
+          // and between two group nodes.
+          //
+          // reduce distance for groups with very few outer links,
+          // again both in expanded and grouped form, i.e. between individual nodes of a group and
+          // nodes of another group or other group node or between two group nodes.
+          //
+          // The latter was done to keep the single-link groups ('blue', rose, ...) close.
+          return 30 +
+            Math.min(20 * Math.min((n1.size || (n1.group != n2.group ? n1.group_data.size : 0)),
+                                   (n2.size || (n1.group != n2.group ? n2.group_data.size : 0))),
+                 -30 +
+                 30 * Math.min((n1.link_count || (n1.group != n2.group ? n1.group_data.link_count : 0)),
+                               (n2.link_count || (n1.group != n2.group ? n2.group_data.link_count : 0))),
+                 100);
+            //return 150;
+          })
+          .linkStrength(function(l, i) {
+          return 1;
+          })
+          .gravity(0.30)   // gravity+charge tweaked to ensure good 'grouped' view (e.g. green group not smack between blue&orange, ...
+          .charge(-700)    // ... charge is important to turn single-linked groups to the outside
+          .friction(0.1)   // friction adjusted to get dampened display: less bouncy bouncy ball [Swedish Chef, anyone?]
+          .start();
+
+
+
+        hullg.selectAll("path.hull").remove();
+        hull = hullg.selectAll("path.hull")
+            .data(convexHulls(net.nodes, getGroup, off))
+          .enter().append("path")
+            .attr("class", "hull")
+            .attr("d", drawCluster)
+            .style("fill", function(d) { return fill(d.group); })
+            .on("click", function(d) {
+      console.log("hull click", d, arguments, this, expand[d.group]);
+            expand[d.group] = false; init();
+          });
+
+        link = linkg.selectAll("line.link").data(net.links, linkid);
+        link.exit().remove();
+        link.enter().append("line")
+            .attr("class", "link")
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; })
+            .style("stroke-width", function(d) { return d.size || 1; });
+
+
+        var drag = force.drag()
+            .on("dragstart", dragstart);
+
+        node = nodeg.selectAll(".node").data(net.nodes, nodeid);
+        node.exit().remove();
+        node.enter().append("circle").call(force.drag)
+            // if (d.size) -- d.size > 0 when d is a group node.
+            .attr("class", function(d) { return "node" + (d.size?"":" leaf"); })
+            .attr("r", function(d) { return d.size ? d.size + dr : dr+1; })
+            .attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; })
+            .style("fill", function(d) { return fill(d.group); })
+            .on("click", function(d) {
+              console.log("node click", d, arguments, this, expand[d.group]);
+              expand[d.group] = !expand[d.group];
+              init();
+            })
+            .on("dblclick", dblclick);
+
+      
+            
+       circle = node.append("path")
+        .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(8 ,2); })
+          .type("circle"))
+        .style("stroke-width", 1.5)
+        .style("stroke", "white");
+
+        node.on("mouseover", function(d) {
+            set_highlight(d);
+            d3.select(this).select('path')
+                .transition()
+                .duration(300)
+                .attr("d", d3.svg.symbol()
+                    .size(function(d) { return Math.PI*Math.pow(8,2.7); })
+                    .type("circle"));
+          })
+        // .on("mousedown", function(d) { d3.event.stopPropagation();
+        //   focus_node = d;
+        //   set_focus(d)
+        //   if (highlight_node === null) set_highlight(d)
+        //   })
+        .on("mouseout", function(d) {
+              exit_highlight();
+              d3.select(this).select('path')
+                  .transition()
+                  .duration(300)
+                  .attr("d", d3.svg.symbol()
+                      .size(function(d) { return Math.PI*Math.pow(8,2); })
+                      .type(circle));
+          });
+
+
+
+        label = labelg.selectAll("text").data(net.nodes, nodeid);
+        label.exit().remove();
+        label.enter().append("text")
+             .attr("dx", 12)
+             .attr("dy", ".35em")
+             .text(function(d) { 
+              console.log(d);
+              return d.name });
+
+        path = linkpathg.selectAll(".edgepath").data(net.links, linkid);
+        path.exit().remove();
+        path.enter().append('path')
+            .attr({'d': function(d) {return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y},
+                   'class':'edgepath',
+                   'fill-opacity':0,
+                   'stroke-opacity':0,
+                   'fill':'blue',
+                   'stroke':'red',
+                   'id':function(d,i) {return 'edgepath'+i}})
+            .style("pointer-events", "none");
+
+        linklabel = linklabelg.selectAll(".edgelabel").data(net.links, linkid);
+        linklabel.exit().remove();
+        linklabel.enter().append('text')
+            .style("pointer-events", "none")
+            .attr({'class':'edgelabel',
+                   'id': function(d,i){ return 'edgelabel'+i},
+                   //TODO add a function so that the text is right at the middle of the link
+                   'dx': function(d){ console.log(d); return 40 },
+                   'dy':0,
+                   'font-size':10,
+                   'fill':'#aaa'});
+
+          linklabel.append('textPath')
+              .attr('xlink:href',function(d,i) {return '#edgepath'+i})
+              .style("pointer-events", "none")
+              .text(function(d,i){
+                console.log(d);
+                return "human"});
+
+
+
+
+        force.on("tick", tick);
+      }
+
+    </script>
+  </body>
+</html>
