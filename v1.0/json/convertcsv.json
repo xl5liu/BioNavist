@@ -3404,7 +3404,7 @@
     "Effect Ref":"EM12,EM13,EM19,EM28,EM29,EM30",
     "Box 2":"Cortisol",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4232,7 +4232,7 @@
     "Effect Ref":"EM1",
     "Box 2":"Melatonin",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4244,7 +4244,7 @@
     "Effect Ref":"EM6",
     "Box 2":"MT1",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4256,7 +4256,7 @@
     "Effect Ref":"EM6",
     "Box 2":"MT3",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4268,7 +4268,7 @@
     "Effect Ref":"EM6",
     "Box 2":"MT2",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4280,7 +4280,7 @@
     "Effect Ref":"JP15",
     "Box 2":"Melatonin",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4292,7 +4292,7 @@
     "Effect Ref":"JP15",
     "Box 2":"N-acetyl serotonin",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4304,7 +4304,7 @@
     "Effect Ref":"JP15",
     "Box 2":"AANAT",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4316,7 +4316,7 @@
     "Effect Ref":"EM5",
     "Box 2":"Melatonin",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4328,7 +4328,7 @@
     "Effect Ref":"EM6",
     "Box 2":"Vasoconstriction",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4340,7 +4340,7 @@
     "Effect Ref":"EM6/JP14",
     "Box 2":"SCN",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4352,7 +4352,7 @@
     "Effect Ref":"EM6",
     "Box 2":"Vasoconstriction",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4362,9 +4362,9 @@
     "Relation":"?",
     "Effect":"(+)",
     "Effect Ref":"EM6",
-    "Box 2":"Phase Shift Circadian Rhythyms",
+    "Box 2":"Phase Shift Circadian Rhythms",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4376,7 +4376,7 @@
     "Effect Ref":"EM6",
     "Box 2":"Splenocyte proliferation",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4388,7 +4388,7 @@
     "Effect Ref":"EM6",
     "Box 2":"Dopamine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4400,7 +4400,7 @@
     "Effect Ref":"EM6",
     "Box 2":"Intraoccular pressure",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4412,19 +4412,19 @@
     "Effect Ref":"JP14",
     "Box 2":"Continuous production of PER1/PER2",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":"Review Pathway"
   },
   {
     "Cat Box 1":"Circadian Rhythm",
-    "Box 1":"Phase Shift Circadian Rhythyms",
+    "Box 1":"Phase Shift Circadian Rhythms",
     "Box 1 Ref":"",
     "Relation":"?",
     "Effect":"(+)",
     "Effect Ref":"EM6",
     "Box 2":"SCN",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4436,7 +4436,7 @@
     "Effect Ref":"JP14",
     "Box 2":"PER1/PER2",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4448,7 +4448,7 @@
     "Effect Ref":"JP15",
     "Box 2":"PKC",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4460,7 +4460,7 @@
     "Effect Ref":"JP15",
     "Box 2":"CREBP",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4472,7 +4472,7 @@
     "Effect Ref":"JP15",
     "Box 2":"cAMP",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4484,7 +4484,7 @@
     "Effect Ref":"JP14",
     "Box 2":"Continuous production of ",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":"Review Pathway"
   },
   {
@@ -4496,7 +4496,7 @@
     "Effect Ref":"JP14",
     "Box 2":"Continuous production of ",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4508,7 +4508,7 @@
     "Effect Ref":"JP14",
     "Box 2":"BMAL",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4520,7 +4520,7 @@
     "Effect Ref":"JP14",
     "Box 2":"CLOCK1",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4532,7 +4532,7 @@
     "Effect Ref":"JP14",
     "Box 2":"BMAL",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4544,7 +4544,7 @@
     "Effect Ref":"JP14",
     "Box 2":"CLOCK1",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4556,7 +4556,7 @@
     "Effect Ref":"JP14/JP17?",
     "Box 2":"Receptors in PVN (needs Detail)",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4568,7 +4568,7 @@
     "Effect Ref":"JP14",
     "Box 2":"PER/PER Dimers",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4580,7 +4580,7 @@
     "Effect Ref":"JP14",
     "Box 2":"PER/CRY Dimers",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4592,7 +4592,7 @@
     "Effect Ref":"JP17",
     "Box 2":"Glutamate",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4604,7 +4604,7 @@
     "Effect Ref":"JP17",
     "Box 2":"Receptors in interomedial lateral column in upper tsc",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4616,7 +4616,7 @@
     "Effect Ref":"JP17",
     "Box 2":"Acetylcholine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4628,7 +4628,7 @@
     "Effect Ref":"JP17",
     "Box 2":"Receptors in Superior Cervical Ganglion",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4640,7 +4640,7 @@
     "Effect Ref":"JP17",
     "Box 2":"Norepinephrine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4652,7 +4652,7 @@
     "Effect Ref":"JP14",
     "Box 2":"Vasopressin",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":"Review Pathway"
   },
   {
@@ -4664,7 +4664,7 @@
     "Effect Ref":"JP14",
     "Box 2":"CRY",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":"Review Pathway"
   },
   {
@@ -4676,7 +4676,7 @@
     "Effect Ref":"JP11",
     "Box 2":"Receptors in SCN",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4688,7 +4688,7 @@
     "Effect Ref":"EM15",
     "Box 2":"Norepinephrine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4700,7 +4700,7 @@
     "Effect Ref":"EM12/EM19",
     "Box 2":"Central Nervous System",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4712,7 +4712,7 @@
     "Effect Ref":"EM19/EM20",
     "Box 2":"Amygdala",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4724,7 +4724,7 @@
     "Effect Ref":"EM32/EM40",
     "Box 2":"Norepinephrine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4736,7 +4736,7 @@
     "Effect Ref":"EM7/EM8",
     "Box 2":"Bone Formation",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4748,7 +4748,7 @@
     "Effect Ref":"EM11",
     "Box 2":"Hippocampal Volume",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4760,7 +4760,7 @@
     "Effect Ref":"EM9/EM11",
     "Box 2":"Memory",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4772,7 +4772,7 @@
     "Effect Ref":"EM14",
     "Box 2":"Cortisol",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4784,7 +4784,7 @@
     "Effect Ref":"EM10",
     "Box 2":"Cortisol",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4796,7 +4796,7 @@
     "Effect Ref":"EM15",
     "Box 2":"Resistin (ADSF, XCP)",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4808,7 +4808,7 @@
     "Effect Ref":"EM15",
     "Box 2":"Dopamine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4820,7 +4820,7 @@
     "Effect Ref":"EM15",
     "Box 2":"Adiponectin",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -4976,7 +4976,7 @@
     "Effect Ref":"JP15",
     "Box 2":"Beta1 receptors in the Pineal Gland",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5012,7 +5012,7 @@
     "Effect Ref":"EM4/EM41",
     "Box 2":"Norepinephrine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5036,7 +5036,7 @@
     "Effect Ref":"EM5/JP13",
     "Box 2":"Beta 1- receptors in Pineal Gland",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5048,7 +5048,7 @@
     "Effect Ref":"NO REFERENCE",
     "Box 2":"Alpha 1- receptors in Pineal Gland",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":"Review Pathway"
   },
   {
@@ -5096,7 +5096,7 @@
     "Effect Ref":"ST22",
     "Box 2":"Dopamine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5108,7 +5108,7 @@
     "Effect Ref":"EM36",
     "Box 2":"Dopamine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5120,7 +5120,7 @@
     "Effect Ref":"EM38/EM39",
     "Box 2":"Cortisol",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5132,7 +5132,7 @@
     "Effect Ref":"EM35",
     "Box 2":"D12",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5144,7 +5144,7 @@
     "Effect Ref":"EM35",
     "Box 2":"D1",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5156,7 +5156,7 @@
     "Effect Ref":"EM42/EM43",
     "Box 2":"Melatonin",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5168,7 +5168,7 @@
     "Effect Ref":"JW1",
     "Box 2":"Serotonin",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5180,7 +5180,7 @@
     "Effect Ref":"AS4",
     "Box 2":"Dopamine( in basal ganglia)",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5192,7 +5192,7 @@
     "Effect Ref":"JW2",
     "Box 2":"Cerebral Glucose Metabolism",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5204,7 +5204,7 @@
     "Effect Ref":"JW3",
     "Box 2":"Dopamine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5252,7 +5252,7 @@
     "Effect Ref":"R2",
     "Box 2":"Dopamine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5264,7 +5264,7 @@
     "Effect Ref":"EM37",
     "Box 2":"Cortisol",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5276,7 +5276,7 @@
     "Effect Ref":"JN13",
     "Box 2":"Dopamine( in basal ganglia)",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5288,7 +5288,7 @@
     "Effect Ref":"EM16",
     "Box 2":"Dopamine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5300,7 +5300,7 @@
     "Effect Ref":"R2",
     "Box 2":"Dopamine",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {
@@ -5312,7 +5312,7 @@
     "Effect Ref":"EP3",
     "Box 2":"PER1/PER2",
     "Box 2 Ref":"",
-    "Cat Box 2":"Circadian Rhythym",
+    "Cat Box 2":"Circadian Rhythm",
     "FIELD10":""
   },
   {

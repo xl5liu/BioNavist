@@ -21,7 +21,7 @@ function findLink(x, y, arr){
 	return -1;
 }
 
-// console.log(json[0]["Box 1"]);
+
 
 for(relation in json){
 
@@ -80,5 +80,5 @@ for(relation in json){
 	}
 
 }
-
-console.log(links);
+//console.log(categories);
+console.log(nodes);
