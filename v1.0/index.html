@@ -17,11 +17,17 @@
       Sort by
       <span class="caret"></span>
     </button>
+
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
       <li id="sortByName"><a href="#">Name</a></li>
       <li id="sortByEdgeCount"><a href="#">Edge Count</a></li>
     </ul>
   </div>
+
+  <form id="file-form" action="handler.php" method="POST">
+  	<input type="file" id="file-select" name="photos[]" multiple/>
+  	<button type="submit" id="upload-button">Upload</button>
+  </form>
 
   <div id="sidebar-links">
 
